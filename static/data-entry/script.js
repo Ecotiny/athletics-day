@@ -482,6 +482,12 @@ function sendParticipation() {
   $("#participationSubmit")[0].innerHTML = spinner;
   var selectedEvent = $("#events-picker1").val();
   let searchedEvent = events.find(o => o.event_name === selectedEvent);
+  // addresses issue #1
+  event_particip = participation[searchedEvent.event_id]
+  if (event_particip.length > 0) {
+    alert("there is already data present for this event - i'm going to reload which should fix the problem");
+    location.reload()
+  }
   var dataToSend = [];
   houses.forEach(function(el) {
     var num_students = parseInt($("#" + el.house_name).val());
@@ -514,6 +520,7 @@ function updateLocalParticipation() {
     authenticated_get(baseurl + "participation/" + el.event_id, function(data) {
       if (data.success) {
         participation[el.event_id] = data.rows;
+	fillParticipation();
       } else {
         alert("Error getting pariticipation data!")
       }
