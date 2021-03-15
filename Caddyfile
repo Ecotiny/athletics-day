@@ -1,0 +1,6 @@
+athletics.liamsc.com {
+	file_server {
+		root /home/linus/athletics-day/static/	
+	}
+	reverse_proxy /api/* 127.0.0.1:3000
+}

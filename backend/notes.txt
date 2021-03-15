@@ -1,0 +1,87 @@
+Plan:
+Events:
+- Name
+- ID
+Houses:
+- Name
+- ID
+Participation:
+- Event ID
+- House ID
+- Number of students that have participated
+- Timestamp?
+Students:
+- Name
+- ID
+- House ID
+Placing:
+- Event ID
+- Student ID
+- House ID
+- Placing
+- Value
+- Points?
+
+POST /event
+- name: string
+- inserts a new event
+- returns: id of this event (event_id/house_id)
+
+GET /event/:id
+- returns: name of event with that id
+
+GET /event
+- returns: all events
+
+Same for houses
+
+POST /student
+- name: string
+- house_id: integer (must match one of the already existent house ids)
+- inserts a new student
+- returns: id of the new student (student_id)
+
+GET /student/:id
+- returns: house, name of student with that id (student_name, house_id)
+
+GET /student
+- returns: all students
+
+POST /participation
+- event_id: integer
+- house_id: integer
+- total_students: integer
+- inserts a participation row
+- returns: nothing
+
+PUT /participation
+- takes in the same information as post
+- updates row with same event and house id
+- returns nothing (true or false/success)
+
+GET /participation/:event_id
+- returns: all participation rows from that event
+
+POST /placing
+- event_id: integer
+- student_id: integer
+- placing: integer
+- value: double
+
+PUT /placing
+- takes in the same information as post
+- updates row with same event and placing
+- returns success
+
+DELETE /placing
+- removes row with event and placing
+- returns success
+
+GET /points/:house_id
+- returns all relevant rows from all relevant tables for front-end calculation of points
+- participation, all particip with that house id
+- placing, all placing with that house id
+- SELECT 
+- returns success
+          "placing" : [array of placings]
+          "participation" : [array]
