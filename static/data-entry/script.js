@@ -285,7 +285,7 @@ function getPlacingRows(event_id) {
     <td class="align-middle"><input id="placing-placing" type="number" min="0" value="` + (maxplacing+1).toString() + `"></td>
     <td>` + getStudentDropdown() + `</td>
     <td><span id="newplacinghouse">${housesObj[students[0].house_id]}</span></td>
-    <td class="align-middle"><input id="placing-value" type="number"></td>
+    <td class="align-middle"><input id="placing-value"></td>
     <td><button class="btn btn-primary" onClick="addPlacing(` + event_id + `)">+</button></td>
   </tr>`;
   return newhtml;

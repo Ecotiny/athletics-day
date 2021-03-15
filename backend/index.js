@@ -458,7 +458,7 @@ api.post('/placing', async (req, res) => {
       return;
     }
     var val = req.body.value;
-    if (typeof req.body.value !== 'undefined') { // logic for when value is undefined, replacing it with a -1
+    if (typeof req.body.value === 'undefined') { // logic for when value is undefined, replacing it with a -1
       val = "-1";
     }
     sql = "INSERT INTO placing (event_id, house_id, student_id, placing, value) VALUES (?,?,?,?,?);";
