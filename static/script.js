@@ -3,13 +3,23 @@ const baseurl = "https://athletics.liamsc.com/api/"
 var houses;
 var points = {};
 
+function getpoints(placing) {
+  switch(placing) {
+    case 1: return 5;
+    case 2: return 3;
+    case 3: return 2;
+    default: return 1;
+  }
+}
+
 function update() {
   console.log("updating");
   houses.forEach((house) => {
-    $.get(`${baseurl}points/${house.house_id}`, function(data) {         points[house.house_id] = 0;
+    $.get(`${baseurl}points/${house.house_id}`, function(data) {         
+      points[house.house_id] = 0;
       if (data.success) {
         data.placing.forEach((el) => {
-          points[house.house_id] += Math.max(4 - el.placing, 0);
+          points[house.house_id] += Math.max(getpoints(el), 0);
         })
         data.participation.forEach((el) => {
           points[house.house_id] += el.num_students;
