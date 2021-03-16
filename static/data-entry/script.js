@@ -12,6 +12,7 @@ var housesObj = {};
 var participation = {};
 var placings = {};
 var prevPlacingsEvent = 0;
+var currentEventId;
 
 // BOOTSTRAP SVGs
 
@@ -152,6 +153,7 @@ function populate() {
       authenticated_get(baseurl + "event", function(data) {
         if (data.success) {
           events = data.rows;
+  
           // for all events, get relevant participation info
           var allevents = true;
           events.forEach(function(el, idx) {
@@ -360,6 +362,8 @@ function updatePlacings() {
   </div>`;
   $("#placings")[0].innerHTML = newhtml;
   $("#events-picker2").selectpicker();
+  $('select[id=events-picker2]').val(events[prevPlacingsEvent-1].event_name);
+  $('#events-picker2').selectpicker('refresh')
   $("#students-picker").selectpicker();
   // $("#house-picker").selectpicker();
 
@@ -520,7 +524,7 @@ function updateLocalParticipation() {
     authenticated_get(baseurl + "participation/" + el.event_id, function(data) {
       if (data.success) {
         participation[el.event_id] = data.rows;
-	fillParticipation();
+	updateParticipation();
       } else {
         alert("Error getting pariticipation data!")
       }
