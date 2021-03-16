@@ -4,11 +4,13 @@ module.exports = {
   authenticate
 };
 
+const users = require('./users').users
+/*
 // users hardcoded for simplicity
 const users = [
   { id: 1, username: 'test', password: 'test', firstName: 'Test', lastName: 'User' }
 ];
-
+*/
 async function authenticate({ username, password }) {
     const user = users.find(u => u.username === username && u.password === password);
     if (user) { // remove password before sending it off

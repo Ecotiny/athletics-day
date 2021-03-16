@@ -578,6 +578,7 @@ api.get('/points/:houseId', async (req, res) => {
 // user without password (object including id, username, firstName, lastName)
 // else returns error : "username or password is incorrect"
 api.post('/auth', (req, res, next) => {
+    console.log("Someone is trying to log in");
     auth.authenticate(req.body)
         .then(user => user ? res.json(user) : res.status(400).json({ success: false, error: 'Username or password is incorrect' }))
         .catch(err => next(err));

@@ -89,6 +89,7 @@ function authenticated_post(url, data, success) {
 function login() {
   if (!logindisabled) {
     logindisabled = true;
+    console.log("logging in...");
     var username = $("#username")[0].value;
     var passwd = $("#password")[0].value;
 
