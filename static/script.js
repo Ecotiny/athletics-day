@@ -18,8 +18,9 @@ function update() {
     $.get(`${baseurl}points/${house.house_id}`, function(data) {         
       points[house.house_id] = 0;
       if (data.success) {
+	console.log(data.placing);
         data.placing.forEach((el) => {
-          points[house.house_id] += Math.max(getpoints(el), 0);
+          points[house.house_id] += Math.max(getpoints(el.placing), 0);
         })
         data.participation.forEach((el) => {
           points[house.house_id] += el.num_students;
