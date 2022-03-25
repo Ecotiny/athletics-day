@@ -14,6 +14,10 @@ let db = new sqlite3.Database('./athletics.db', (err) => {
 // DB has already been created.
 });
 
+db_manip.create_db(db)
+  .then(() => db_manip.make_houses(db))
+  .catch(console.log)
+
 var app = express(); // initialise express app
 var api = express.Router(); // create router for api
 

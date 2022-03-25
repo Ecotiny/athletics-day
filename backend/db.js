@@ -1,31 +1,31 @@
 const creation_queries = [
-  `DROP TABLE IF EXISTS "events";`,
-  `DROP TABLE IF EXISTS "houses";`,
-  `DROP TABLE IF EXISTS "students";`,
-  `DROP TABLE IF EXISTS "participation";`,
-  `DROP TABLE IF EXISTS "placing";`,
+  `DELETE FROM "events";`,
+  `DELETE FROM "houses";`,
+  `DELETE FROM "students";`,
+  `DELETE FROM "participation";`,
+  `DELETE FROM "placing";`,
   ` CREATE TABLE IF NOT EXISTS "events" (
     "event_name" TEXT, 
     "event_id" INTEGER PRIMARY KEY
   );`,
-  ` CREATE TABLE IF NOT EXISTS "houses" (
+  ` CREATE TABLE IF NOT EXISTS  "houses" (
     "house_name" TEXT, 
     "house_id" INTEGER PRIMARY KEY
   );`,
-  ` CREATE TABLE IF NOT EXISTS "students" (
+  ` CREATE TABLE  IF NOT EXISTS "students" (
     "student_name" TEXT,
     "student_id" INTEGER PRIMARY KEY,
     "house_id" INTEGER,
     FOREIGN KEY("house_id") REFERENCES houses("house_id")
   );`,
-  ` CREATE TABLE IF NOT EXISTS "participation" (
+  ` CREATE TABLE  IF NOT EXISTS "participation" (
     "event_id" INTEGER,
     "house_id" INTEGER,
     "num_students" INTEGER,
     FOREIGN KEY("event_id") REFERENCES events("event_id"),
     FOREIGN KEY("house_id") REFERENCES houses("house_id")
   );`,
-  ` CREATE TABLE IF NOT EXISTS "placing" (
+  ` CREATE TABLE  IF NOT EXISTS "placing" (
     "event_id" INTEGER,
     "house_id" INTEGER,
     "student_id" INTEGER,
@@ -50,21 +50,20 @@ const test_students = `INSERT INTO students (student_name, house_id) VALUES
                       ("Paxton Hall", 0);`;
 
 module.exports = {
-  create_db: function(db) {
+  create_db: async function(db) {
     console.log("creating database");
     return new Promise(function(resolve, reject) {
-      // Do async job
       var any_error = false;
-      creation_queries.forEach(function(query, index) {
-        console.log(query);
-        db.run(query, [], function(err) {
-          if (err) {
-            console.log("err");
-            console.log(err);
-            any_error = err;
-          };
-        });
-      });
+      db.exec(creation_queries.join('\n'), console.log)
+      // creation_queries.forEach((query, index) => {
+      //   db.run(query, [], function(err) {
+      //     if (err) {
+      //       console.log("error in executing");
+      //       console.log(err);
+      //       any_error = err;
+      //     };
+      //   });
+      // });
       if (any_error) {
         reject(any_error);
       } else {
@@ -76,6 +75,8 @@ module.exports = {
     console.log("adding houses");
     db.run(house_query, [], function(err) {
       if (err) {
+        console.log("error in executing");
+        console.log(house_query);
         console.log(err);
         return(err);
       } else {

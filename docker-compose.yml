@@ -9,6 +9,7 @@ services:
         #      - ./package-lock.json:/opt/node_app/package-lock.json
     expose:
       - 3000
+    restart: always
 
   caddy:
     image: caddy:2.0.0-alpine
@@ -19,7 +20,8 @@ services:
     volumes:
         - ./static:/static
         - ./Caddyfile:/etc/caddy/Caddyfile
-          #        - ./certs/config:/root/.config/caddy
-          #        - ./certs/local:/root/.local/share/caddy
-          #        - ./certs/data:/data
-          #        - ./certs/local-config:/config
+        - ./certs/config:/root/.config/caddy
+        - ./certs/local:/root/.local/share/caddy
+        - ./certs/data:/data
+        - ./certs/local-config:/config
+    restart: always
