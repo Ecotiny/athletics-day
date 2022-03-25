@@ -1,0 +1,25 @@
+version: "3.1"
+services:
+  node:
+    build:
+      context: backend/
+    volumes:
+      - ./backend:/opt/node_app/app
+        #      - ./package.json:/opt/node_app/package.json
+        #      - ./package-lock.json:/opt/node_app/package-lock.json
+    expose:
+      - 3000
+
+  caddy:
+    image: caddy:2.0.0-alpine
+    ports:
+        - 80:80
+        - 443:443
+    user: root
+    volumes:
+        - ./static:/static
+        - ./Caddyfile:/etc/caddy/Caddyfile
+          #        - ./certs/config:/root/.config/caddy
+          #        - ./certs/local:/root/.local/share/caddy
+          #        - ./certs/data:/data
+          #        - ./certs/local-config:/config

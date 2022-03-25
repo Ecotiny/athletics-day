@@ -1,5 +1,5 @@
 // CONFIG
-const baseurl = "https://athletics.liamsc.com/api/";//"https://athletics.linusmolteno.repl.co/api/";
+const baseurl = "/api/"//"https://athletics.liamsc.com/api/";//"https://athletics.linusmolteno.repl.co/api/";
 const students_per_page = 50;
 
 // GLOBALS
