@@ -7,7 +7,7 @@ module.exports = {
 //const users = require('./users').users*
 // users hardcoded for simplicity
 const users = [
-  { id: 1, username: 'test', password: 'test', firstName: 'Test', lastName: 'User' }
+  { id: 1, username: 'user', password: 'password', firstName: 'Default', lastName: 'User' }
 ];
 
 async function authenticate({ username, password }) {
