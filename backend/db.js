@@ -1,9 +1,4 @@
 const creation_queries = [
-  `DELETE FROM "events";`,
-  `DELETE FROM "houses";`,
-  `DELETE FROM "students";`,
-  `DELETE FROM "participation";`,
-  `DELETE FROM "placing";`,
   ` CREATE TABLE IF NOT EXISTS "events" (
     "event_name" TEXT, 
     "event_id" INTEGER PRIMARY KEY
@@ -34,7 +29,12 @@ const creation_queries = [
     FOREIGN KEY(event_id) REFERENCES events(event_id),
     FOREIGN KEY(house_id) REFERENCES houses(house_id),
     FOREIGN KEY(student_id) REFERENCES students(student_id)
-  );`
+  );`,
+  `DELETE FROM "events";`,
+  `DELETE FROM "houses";`,
+  `DELETE FROM "students";`,
+  `DELETE FROM "participation";`,
+  `DELETE FROM "placing";`
 ];
 
 const house_query = `INSERT INTO 'houses' (house_name, house_id) VALUES
