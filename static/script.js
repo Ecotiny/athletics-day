@@ -1,4 +1,4 @@
-const baseurl = "https://athletics.liamsc.com/api/"
+const baseurl = "/api/"
 
 var houses;
 var points = {};

@@ -363,7 +363,7 @@ function updatePlacings() {
   </div>`;
   $("#placings")[0].innerHTML = newhtml;
   $("#events-picker2").selectpicker();
-  $('select[id=events-picker2]').val(events[prevPlacingsEvent-1].event_name);
+  $('select[id=events-picker2]').val(events.find(e => e.event_id == prevPlacingsEvent).event_name);
   $('#events-picker2').selectpicker('refresh')
   $("#students-picker").selectpicker();
   // $("#house-picker").selectpicker();
