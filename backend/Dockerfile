@@ -5,7 +5,7 @@ ENV NODE_ENV production
 ENV PORT 3000
 EXPOSE $PORT
 
-RUN npm i npm@latest -g
+RUN npm i npm@6.14.5 -g
 
 RUN mkdir /opt/node_app && chown node:node /opt/node_app
 WORKDIR /opt/node_app
